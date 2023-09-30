@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, computed, watchEffect } from 'vue';
   
   const canvas = ref(null);
   const ctx = ref(null);
@@ -7,7 +7,26 @@
   const brushSize = ref(20);
   const isPainting = ref(false);
   const activeTool = ref('brush');
-  
+
+  const personBg = ref('');
+  const backBg = ref('');
+
+  const selectPerson = (value) => {
+    personBg.value = value;
+  }
+
+  const selectBackground = (valueBg) => {
+    backBg.value = valueBg;
+  }
+
+  const personSrc = computed(() => {
+    return `/public/personajes/persona${personBg.value}.svg`
+  });
+
+  const fondoSrc = computed(() => {
+    return `/public/escenas/escena${backBg.value}.svg`
+  });
+
   onMounted(() => {
     const canvasElement = canvas.value;
     if (!canvasElement) {
@@ -16,7 +35,41 @@
     }
     
     ctx.value = canvasElement.getContext("2d");
-  });
+
+ 
+     // Carga la imagen de fondo
+     const loadBackgroundImage = () => {
+      var fondo = new Image();
+      fondo.src = fondoSrc.value;
+
+      fondo.onload = function() {
+        ctx.value.drawImage(fondo, 0, 0, canvasElement.width, canvasElement.height);
+      };
+    };
+      watchEffect(() => {loadBackgroundImage()});
+
+
+     // pesonaje
+     const loadPersonImage = () => {
+       var person = new Image();
+     person.src = personSrc.value; // Reemplaza con la ruta de tu imagen
+
+     // Espera a que la imagen se cargue antes de dibujarla
+     person.onload = function() {
+         ctx.value.drawImage(person, 350, 250, 250, 250); // Dibuja la imagen en el canvas
+     };
+     };
+     watchEffect(() => {loadPersonImage()});
+    
+ 
+  
+ });
+
+ 
+
+
+
+
   
   const onCanvasMouseDown = (event) => {
     isPainting.value = true;
@@ -73,9 +126,13 @@
   const clearCanvas = () => {
     ctx.value.clearRect(0, 0, canvas.value.width, canvas.value.height);
   };
+
+
+        
   </script>
 
 <template>
+
     <div>
       <section class="containerPaint">
         <canvas ref="canvas" width="900" height="500" @mousedown="onCanvasMouseDown" @mousemove="onCanvasMouseMove" @mouseup="onCanvasMouseUp"></canvas>
@@ -121,7 +178,24 @@
         </div>
       </section>
     </div>
-  </template>
+
+
+    <section class="containerButtons">
+      <div class="backBtn">
+          <button @click="selectBackground(1)" class="backBtn1"></button>
+          <button @click="selectBackground(2)" class="backBtn2"></button>
+          <button @click="selectBackground(3)" class="backBtn3"></button>
+          <button @click="selectBackground(4)" class="backBtn4"></button>
+      </div>
+      <div class="personBtn">
+          <button @click="selectPerson(1)" class="personBtn1"></button>
+          <button @click="selectPerson(2)" class="personBtn2"></button>
+          <button @click="selectPerson(3)" class="personBtn3"></button>
+          <button @click="selectPerson(4)" class="personBtn4"></button>
+      </div>
+    </section>
+
+</template>
   
   
   
@@ -229,4 +303,69 @@
   .active {
       background-color: #f2f2f2;
   }
+
+  .containerButtons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.personBtn{
+    height: 100px;
+}
+
+ .personBtn button {
+    height:80px;
+    width: 150px;
+    background-size:contain;
+}  
+
+.backBtn button {
+    height:80px;
+    width: 150px;
+}  
+
+.personBtn1{
+  background-image: url('../public/personajes/persona1.svg');
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.personBtn2{
+  background-image: url('../public/personajes/persona2.svg');
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.personBtn3{
+  background-image: url('../public/personajes/persona3.svg');
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.personBtn4{
+  background-image: url('../public/personajes/persona4.svg');
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.backBtn1{
+  background-image: url('../public/escenas/escena1.svg');
+  background-size: cover;
+}
+.backBtn2{
+  background-image: url('../public/escenas/escena2.svg');
+  background-size: cover;
+}
+.backBtn3{
+  background-image: url('../public/escenas/escena3.svg');
+  background-size: cover;
+}
+.backBtn4{
+  background-image: url('../public/escenas/escena4.svg');
+  background-size: cover;
+}
+
+
+
   </style>
