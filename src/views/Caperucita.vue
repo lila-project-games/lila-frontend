@@ -1,7 +1,7 @@
 <script setup>
-
+import CaperucitaText from '../components/CaperucitaText.vue';
 </script>
 
 <template>
-    <h1>Caperucita</h1>
+    <CaperucitaText></CaperucitaText>
 </template>
