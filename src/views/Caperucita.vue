@@ -1,12 +1,12 @@
 <script setup>
+import CaperucitaText from '../components/CaperucitaText.vue';
 import CaperucitaTabla from '../components/CaperucitaTabla.vue'
 </script>
 
 <template>
-    
     <h1>Caperucita Roja</h1>
     <CaperucitaTabla class="tabla"/>
-    
+    <CaperucitaText></CaperucitaText>
 </template>
 
 <style>
@@ -19,3 +19,5 @@ h1{
     color: #FF2F32;
 }
 </style>
+
+
