@@ -5,7 +5,7 @@
 
 <template> 
 
-     <img src="../assets/Group 3.svg" class="imgValue" alt=""> 
+     <img src="../assets/cabecera_paint.svg" class="imgValue" alt=""> 
     <PaintJs></PaintJs>
    
 </template>

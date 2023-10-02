@@ -10,21 +10,37 @@
 
   const personBg = ref('');
   const backBg = ref('');
+  const personDisab = ref();
+  const backDisab = ref();
 
   const selectPerson = (value) => {
     personBg.value = value;
+    personDisab.value = true;
   }
 
   const selectBackground = (valueBg) => {
     backBg.value = valueBg;
+    backDisab.value = true;
+  }
+
+  const saveBttn = () => {
+    let dataURL = canvas.value.toDataURL("image/png");
+    let enlace = document.createElement("a");
+    enlace.href = dataURL;
+    enlace.download = "mi_imagen.png";
+    enlace.click();
   }
 
   const personSrc = computed(() => {
-    return `/public/personajes/persona${personBg.value}.svg`
+    if (personBg.value !== ''){
+      return `/public/personajes/persona${personBg.value}.svg`
+    }   
   });
 
   const fondoSrc = computed(() => {
+    if (backBg.value !== ''){
     return `/public/escenas/escena${backBg.value}.svg`
+    }
   });
 
   onMounted(() => {
@@ -35,40 +51,29 @@
     }
     
     ctx.value = canvasElement.getContext("2d");
-
  
-     // Carga la imagen de fondo
-     const loadBackgroundImage = () => {
-      var fondo = new Image();
-      fondo.src = fondoSrc.value;
-
-      fondo.onload = function() {
-        ctx.value.drawImage(fondo, 0, 0, canvasElement.width, canvasElement.height);
+     //imagen de fondo
+      const loadBackgroundImage = () => {
+        let fondo = new Image();
+        fondo.src = fondoSrc.value;
+        fondo.onload = function() {   
+          ctx.value.drawImage(fondo, 0, 0, canvasElement.width, canvasElement.height);
+        };
       };
-    };
       watchEffect(() => {loadBackgroundImage()});
 
 
      // pesonaje
      const loadPersonImage = () => {
-       var person = new Image();
-     person.src = personSrc.value; // Reemplaza con la ruta de tu imagen
+       let person = new Image();
+       person.src = personSrc.value; 
+       person.onload = function() {
+         ctx.value.drawImage(person, 350, 180, 300, 300); 
+        };
+      };
+      watchEffect(() => {loadPersonImage()}); 
 
-     // Espera a que la imagen se cargue antes de dibujarla
-     person.onload = function() {
-         ctx.value.drawImage(person, 350, 250, 250, 250); // Dibuja la imagen en el canvas
-     };
-     };
-     watchEffect(() => {loadPersonImage()});
-    
- 
-  
- });
-
- 
-
-
-
+  });
 
   
   const onCanvasMouseDown = (event) => {
@@ -125,11 +130,12 @@
   
   const clearCanvas = () => {
     ctx.value.clearRect(0, 0, canvas.value.width, canvas.value.height);
-  };
+    backDisab.value = false;
+    personDisab.value = false;
+  };      
 
+</script>
 
-        
-  </script>
 
 <template>
 
@@ -182,16 +188,19 @@
 
     <section class="containerButtons">
       <div class="backBtn">
-          <button @click="selectBackground(1)" class="backBtn1"></button>
-          <button @click="selectBackground(2)" class="backBtn2"></button>
-          <button @click="selectBackground(3)" class="backBtn3"></button>
-          <button @click="selectBackground(4)" class="backBtn4"></button>
+          <button @click="selectBackground(1)" :disabled="backDisab" class="backBtn1"></button>
+          <button @click="selectBackground(2)" :disabled="backDisab" class="backBtn2"></button>
+          <button @click="selectBackground(3)" :disabled="backDisab" class="backBtn3"></button>
+          <button @click="selectBackground(4)" :disabled="backDisab" class="backBtn4"></button>
+      </div>
+      <div class="saveBtn">
+          <button @click="saveBttn">GUARDAR</button>
       </div>
       <div class="personBtn">
-          <button @click="selectPerson(1)" class="personBtn1"></button>
-          <button @click="selectPerson(2)" class="personBtn2"></button>
-          <button @click="selectPerson(3)" class="personBtn3"></button>
-          <button @click="selectPerson(4)" class="personBtn4"></button>
+          <button @click="selectPerson(1)" :disabled="personDisab" class="personBtn1"></button>
+          <button @click="selectPerson(2)" :disabled="personDisab" class="personBtn2"></button>
+          <button @click="selectPerson(3)" :disabled="personDisab" class="personBtn3"></button>
+          <button @click="selectPerson(4)" :disabled="personDisab" class="personBtn4"></button>
       </div>
     </section>
 
@@ -307,23 +316,37 @@
   .containerButtons {
     display: flex;
     justify-content: space-around;
+    
 }
 
-.personBtn{
+.personBtn{   
     height: 100px;
+    
 }
 
  .personBtn button {
     height:80px;
     width: 150px;
     background-size:contain;
+    margin-left: 10px;
 }  
 
 .backBtn button {
     height:80px;
     width: 150px;
+    margin-left: 10px;
 }  
 
+.saveBtn button{
+    height:80px;
+    width: 150px;
+    background-color: #8B52FE;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    border-radius: 10%;
+    margin-left: 10px;
+}
 .personBtn1{
   background-image: url('../public/personajes/persona1.svg');
   background-size:contain;
@@ -366,6 +389,4 @@
   background-size: cover;
 }
 
-
-
-  </style>
+</style>
