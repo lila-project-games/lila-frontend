@@ -68,7 +68,7 @@
        let person = new Image();
        person.src = personSrc.value; 
        person.onload = function() {
-         ctx.value.drawImage(person, 350, 180, 300, 300); 
+         ctx.value.drawImage(person, 350, 100, 400, 400); 
         };
       };
       watchEffect(() => {loadPersonImage()}); 
@@ -228,7 +228,7 @@
   
   .containerPaint {
       width: 100%;
-      min-height:60vh;
+      min-height:55vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -316,12 +316,12 @@
   .containerButtons {
     display: flex;
     justify-content: space-around;
-    
+    margin-top: 5vh;
 }
 
 .personBtn{   
     height: 100px;
-    
+  
 }
 
  .personBtn button {
@@ -329,12 +329,14 @@
     width: 150px;
     background-size:contain;
     margin-left: 10px;
+    border-color: #000000;
 }  
 
 .backBtn button {
     height:80px;
     width: 150px;
     margin-left: 10px;
+    border-color: #000000;
 }  
 
 .saveBtn button{
@@ -348,44 +350,44 @@
     margin-left: 10px;
 }
 .personBtn1{
-  background-image: url('../public/personajes/persona1.svg');
+  background-image: url('../public/personajes/caperucitaColor.svg');
   background-size:contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 .personBtn2{
-  background-image: url('../public/personajes/persona2.svg');
+  background-image: url('../public/personajes/abuelitaColor.svg');
   background-size:contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 .personBtn3{
-  background-image: url('../public/personajes/persona3.svg');
+  background-image: url('../public/personajes/loboColor.svg');
   background-size:contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 .personBtn4{
-  background-image: url('../public/personajes/persona4.svg');
+  background-image: url('../public/personajes/cazadorColor.svg');
   background-size:contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .backBtn1{
-  background-image: url('../public/escenas/escena1.svg');
+  background-image: url('../public/escenas/escena1Color.svg');
   background-size: cover;
 }
 .backBtn2{
-  background-image: url('../public/escenas/escena2.svg');
+  background-image: url('../public/escenas/escena2Color.svg');
   background-size: cover;
 }
 .backBtn3{
-  background-image: url('../public/escenas/escena3.svg');
+  background-image: url('../public/escenas/escena3Color.svg');
   background-size: cover;
 }
 .backBtn4{
-  background-image: url('../public/escenas/escena4.svg');
+  background-image: url('../public/escenas/escena4Color.svg');
   background-size: cover;
 }
 
