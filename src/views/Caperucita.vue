@@ -1,15 +1,26 @@
 <script setup>
-import CaperucitaText from '../components/CaperucitaText.vue';
-import CaperucitaTabla from '../components/CaperucitaTabla.vue'
+
+    import PaintJs from '../components/PaintJs.vue';
+    import CaperucitaText from '../components/CaperucitaText.vue';
+    import CaperucitaTabla from '../components/CaperucitaTabla.vue'
 </script>
 
-<template>
-    <h1>Caperucita Roja</h1>
+
+<template> 
+
+     <img src="../assets/cabecera_paint.svg" class="imgValue" alt=""> 
+    <PaintJs></PaintJs>    
     <CaperucitaTabla class="tabla"/>
     <CaperucitaText></CaperucitaText>
+   
 </template>
 
-<style>
+
+<style scoped>
+    .imgValue{
+        width: 100%;
+       
+    }
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 h1{
@@ -19,5 +30,11 @@ h1{
     color: #FF2F32;
 }
 </style>
+
+
+
+
+
+
 
 
