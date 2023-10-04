@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router';
+
+
+
 const characters = ref([
     {
         name: 'caperucita',
@@ -52,11 +56,15 @@ const characters = ref([
                 <tr>
                     <td></td>
                     <td></td>
-                    <td><button  id="printButton" value="Imprimir" onclick="javascript:window.print()">Imprimir</button></td>
+                    <RouterLink to="/paint">
+                        <td><button  id="printButton" value="Imprimir" >Imprimir</button></td>
+                    </RouterLink>
+                    
+                     <!-- onclick="javascript:window.print()" -->
                 </tr>
             </tfoot>
         </table>
-        
+       
     </div>
     
       

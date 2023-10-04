@@ -1,5 +1,6 @@
 <script setup>
   import { ref, onMounted, computed, watchEffect } from 'vue';
+  import { RouterLink, useRouter} from 'vue-router';
   
   const canvas = ref(null);
   const ctx = ref(null);
@@ -23,12 +24,13 @@
     backDisab.value = true;
   }
 
-  const saveBttn = () => {
+  const saveBttn = (navigate) => {
     let dataURL = canvas.value.toDataURL("image/png");
     let enlace = document.createElement("a");
     enlace.href = dataURL;
     enlace.download = "mi_imagen.png";
     enlace.click();
+    navigate();
   }
 
   const personSrc = computed(() => {
@@ -140,6 +142,8 @@
 <template>
 
     <div>
+      <img src="../assets/header2.svg" class="imgValue" alt="Header Paint"> 
+
       <section class="containerPaint">
         <canvas ref="canvas" width="900" height="500" @mousedown="onCanvasMouseDown" @mousemove="onCanvasMouseMove" @mouseup="onCanvasMouseUp"></canvas>
   
@@ -194,7 +198,10 @@
           <button @click="selectBackground(4)" :disabled="backDisab" class="backBtn4"></button>
       </div>
       <div class="saveBtn">
-          <button @click="saveBttn">GUARDAR</button>
+        <RouterLink to="/text" v-slot="{ navigate }">
+           <button @click="saveBttn(navigate)">GUARDAR</button>  
+        </RouterLink>
+         
       </div>
       <div class="personBtn">
           <button @click="selectPerson(1)" :disabled="personDisab" class="personBtn1"></button>
@@ -209,120 +216,127 @@
   
   
   
-  <style scoped>
+<style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
   * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-  
+
+  .imgValue{
+    width: 100%;
+       
+  }
+ 
   body {
-      background-color: #d8d8e1;
+    background-color: #d8d8e1;
   }
   
   canvas {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   }
   
   .containerPaint {
-      width: 100%;
-      min-height:55vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    width: 100%;
+    min-height:55vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .tool-box {
-      width: 110px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-      margin-left: 40px;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
+    width: 110px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    margin-left: 40px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
   }
   
   .button__tool,
   .button__size {
-      height: 45px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: none;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
   }
   
   .button__tool > span {
-      font-size: 1.8rem;
+    font-size: 1.8rem;
   }
   
   .button__tool:hover,
   .button__size:hover {
-      background-color: #f2f2f2;
+    background-color: #f2f2f2;
   }
   
   .input__color {
-      width: 45px;
-      height: 45px;
-      border: none;
-      background: none;
-      cursor: pointer;
-      padding: 5px 7px;
+    width: 45px;
+    height: 45px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px 7px;
   }
   
   .input__color::-webkit-color-swatch {
-      border-radius: 100px;
+    border-radius: 100px;
   }
   
   .button__size {
-      padding: 10px;
-      height: auto;
+    padding: 10px;
+    height: auto;
   }
   
   .button__size > span {
-      width: 100%;
-      background-color: #000;
-      border-radius: 100px;
-      display: block;
+    width: 100%;
+    background-color: #000;
+    border-radius: 100px;
+    display: block;
   }
   
   .button__size[data-size="5"] > span {
-      height: 5px;
+    height: 5px;
   }
   
   .button__size[data-size="10"] > span {
-      height: 10px;
+    height: 10px;
   }
   
   .button__size[data-size="20"] > span {
-      height: 20px;
+    height: 20px;
   }
   
   .button__size[data-size="30"] > span {
-      height: 30px;
+    height: 30px;
   }
   
   .active {
-      background-color: #f2f2f2;
+    background-color: #f2f2f2;
   }
 
   .containerButtons {
     display: flex;
     justify-content: space-around;
     margin-top: 5vh;
-}
+  }
 
-.personBtn{   
+  .personBtn{   
     height: 100px;
-  
-}
+    
+  }
 
  .personBtn button {
     height:80px;
@@ -330,16 +344,16 @@
     background-size:contain;
     margin-left: 10px;
     border-color: #000000;
-}  
+  }  
 
-.backBtn button {
+  .backBtn button {
     height:80px;
     width: 150px;
     margin-left: 10px;
     border-color: #000000;
-}  
+  }  
 
-.saveBtn button{
+  .saveBtn button{
     height:80px;
     width: 150px;
     background-color: #8B52FE;
@@ -348,47 +362,47 @@
     font-weight: bold;
     border-radius: 10%;
     margin-left: 10px;
-}
-.personBtn1{
-  background-image: url('../public/personajes/caperucitaColor.svg');
-  background-size:contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.personBtn2{
-  background-image: url('../public/personajes/abuelitaColor.svg');
-  background-size:contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.personBtn3{
-  background-image: url('../public/personajes/loboColor.svg');
-  background-size:contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.personBtn4{
-  background-image: url('../public/personajes/cazadorColor.svg');
-  background-size:contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+  }
+  .personBtn1{
+    background-image: url('../public/personajes/caperucitaColor.svg');
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .personBtn2{
+    background-image: url('../public/personajes/abuelitaColor.svg');
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .personBtn3{
+    background-image: url('../public/personajes/loboColor.svg');
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .personBtn4{
+    background-image: url('../public/personajes/cazadorColor.svg');
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 
-.backBtn1{
-  background-image: url('../public/escenas/escena1Color.svg');
-  background-size: cover;
-}
-.backBtn2{
-  background-image: url('../public/escenas/escena2Color.svg');
-  background-size: cover;
-}
-.backBtn3{
-  background-image: url('../public/escenas/escena3Color.svg');
-  background-size: cover;
-}
-.backBtn4{
-  background-image: url('../public/escenas/escena4Color.svg');
-  background-size: cover;
-}
+  .backBtn1{
+    background-image: url('../public/escenas/escena1Color.svg');
+    background-size: cover;
+  }
+  .backBtn2{
+    background-image: url('../public/escenas/escena2Color.svg');
+    background-size: cover;
+  }
+  .backBtn3{
+    background-image: url('../public/escenas/escena3Color.svg');
+    background-size: cover;
+  }
+  .backBtn4{
+    background-image: url('../public/escenas/escena4Color.svg');
+    background-size: cover;
+  }
 
 </style>

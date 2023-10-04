@@ -14,6 +14,16 @@ const router = createRouter({
       path: '/caperucita',
       name: 'caperucita',
       component: () => import('../views/Caperucita.vue')
+    },
+    {
+      path: '/paint',
+      name: 'paint',
+      component: () => import('../views/PaintView.vue')
+    },
+    {
+      path: '/text',
+      name: 'text',
+      component: () => import('../views/TextView.vue')
     }
   ]
 })
