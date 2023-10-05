@@ -1,3 +1,4 @@
+
 <script setup> 
     import CaperucitaTabla from '../components/CaperucitaTabla.vue'
 </script>
@@ -22,6 +23,7 @@
        
     }
 </style>
+
 
 
 
