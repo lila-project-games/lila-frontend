@@ -1,5 +1,6 @@
 <template>
   <div class="storybook">
+    <img src="../assets/header3.svg" class="imgValue" alt="Header Caperucita"> 
     <div class="outer-box">
       <div class="inner-box">
         <div class="title">
