@@ -146,29 +146,5 @@
 </style>
 
 <script>
-export default {
-  data() {
-    return {
-      text: "",
-      maxWords: 100, // Establece aquí el límite de palabras deseado
-    };
-  },
-  computed: {
-    // Calcula el número de palabras restantes
-    remainingWords() {
-      const words = this.text.trim().split(/\s+/);
-      return this.maxWords - words.length;
-    },
-  },
-  methods: {
-    // Limita el número de palabras
-    limitWordCount() {
-      const words = this.text.trim().split(/\s+/);
-      if (words.length > this.maxWords) {
-        // Si se supera el límite, elimina las palabras adicionales
-        this.text = words.slice(0, this.maxWords).join(" ");
-      }
-    },
-  },
-};
+
 </script>
