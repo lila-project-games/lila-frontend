@@ -4,9 +4,9 @@
       <div class="title">
           ÉRASE UNA VEZ...
       </div>
-      <textarea class="story-text" v-model="text" @input="limitWordCount" rows="5" placeholder="Escribe tu historia aquí..."></textarea>
+      <textarea class="story-text" rows="5" placeholder="Escribe tu historia aquí..."></textarea>
     </div>
-    <button @click="imprimir" class="custom-button">
+    <button class="custom-button">
       <img src="../assets/printButton.svg">
     </button>
 </template>
@@ -65,36 +65,4 @@
   align-items: center;
   justify-content: center;
 }
-
-@media print {
-
-  @page {
-    margin: 0;
-  }
-  
-  #izquierda {
-    width: 19cm;
-    margin: auto;
-  }
-
-  #footer {
-    display: none;
-    font-size: 10pt;
-  }
-
-  .custom-button {
-    display: none;
-  }
-}
-
 </style>
-
-<script>
-export default {
-  methods: {
-    imprimir() {
-      window.print(); // Abre el cuadro de diálogo de impresión del navegador
-    }
-  }
-};
-</script>
