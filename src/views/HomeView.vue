@@ -40,7 +40,7 @@ import FooterLila from "../components/FooterLila.vue";
     <div class="container-fluid">
       <div class="container conten-form">
         <form>
-          <fieldset disabled>
+          <fieldset>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label">Nombre</label>
               <input type="text" id="disabledTextInput" class="form-control" />
