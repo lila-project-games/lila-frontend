@@ -24,7 +24,27 @@ const router = createRouter({
       path: '/text',
       name: 'text',
       component: () => import('../views/TextView.vue')
-    }
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../views/admin/AdminView.vue')
+    },
+    {
+      path: '/admin/schools',
+      name: 'colegios',
+      component: () => import('../views/admin/SchoolsView.vue')
+    },
+    {
+      path: '/admin/schools/edit/:id',
+      name: 'editar-colegio',
+      component: () => import('../views/admin/SchoolsEditView.vue')
+    },
+    {
+      path: '/admin/schools/new',
+      name: 'nuevo-colegio',
+      component: () => import('../views/admin/SchoolsNewView.vue')
+    },
   ]
 })
 
