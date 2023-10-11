@@ -1,25 +1,15 @@
 import { describe, it, expect } from 'vitest'
-import VueRouter from "vue-router";
-import {createLocalVue, mount } from '@vue/test-utils'
-import CaperucitaTabla from '@/components/CaperucitaTabla.vue'
 
-const localVue = createLocalVue();
-localVue.use(VueRouter);
+import {  shallowMount } from '@vue/test-utils'
+import Caperucita from '../../views/Caperucita.vue'
 
- describe('proff', () => {
-     it('renders properly', () => {
-        const wrapper = mount(CaperucitaTabla,{
-            localVue,
-        });
-        const characters = wrapper.vm.$data.characters;
-        expect(Array.isArray(characters)).toBe(true);
-     })
 
- })
 
-describe("inicial render", () => {
-    it("renders properly", () => {
-      const wrapper = mount(CaperucitaTabla);
-      expect(wrapper.find("#container-table").exists()).toBe(true);
-    });
-  }); 
+describe('Caperucita', () => {
+
+      it('header img exists', () => {
+        const wrapper = shallowMount(Caperucita)
+        const headerImage = wrapper.find("img");
+        expect(headerImage.exists()).toBe(true);
+      })
+}); 

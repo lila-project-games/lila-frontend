@@ -15,7 +15,7 @@
     expect(headerImage.exists()).toBe(true);
   })
 
-  it('button render properly', () => {
+  it('button render properly', () => { 
     const wrapper = mount(HomeView)
     const startButton = wrapper.find("button");
     expect(startButton.exists()).toBe(true);
