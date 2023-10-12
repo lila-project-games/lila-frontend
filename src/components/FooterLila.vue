@@ -12,12 +12,8 @@ export default {
 <template>
   <footer class="footer">
     <div class="container_h4">
-      <img
-        src="../assets/lila_transp.png"
-        alt="Logo Lila"
-        class="lila_transp"
-      />
-      <h4>&copy; {{ currentYear }} Copyright: Proyecto Lila</h4>
+      <img src="../assets/logoLila.png" alt="Logo Lila" class="lila_transp" />
+      <h4> &nbsp;{{ currentYear }} &copy; Proyecto Lila</h4>
     </div>
   </footer>
 </template>
@@ -27,30 +23,30 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  background-color: #b88cf0;
-  padding: 5px;
+  background-color: rgb(139,83,255);
+  padding: 10px;
   text-align: center;
   align-items: center;
   position: fixed;
   bottom: 0%;
   width: 100%;
-  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.2);
+
 }
 .container_h4 {
   display: flex;
   align-items: center;
   color: white;
 }
-.h4 {
+h4 {
   margin: 0%;
-  font-size: 20px;
+  font-size: 1.1em;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .lila_transp {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   display: flex;
   justify-content: center;
 }

@@ -1,8 +1,7 @@
 <script setup>
+import swal from 'sweetalert';
+import { useRouter } from 'vue-router';
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router';
-
-
 
 const characters = ref([
     {
@@ -21,9 +20,39 @@ const characters = ref([
         name: 'cazador',
         image: "../public/images/cazador.svg"
     }
-])
+]);
 
+const router = useRouter();
 
+const isitTrue = (campo) => {
+    return ((campo == null) || (campo.length === 0)) ? false : true;
+}
+
+const validate=()=>{
+    let comocaperucita = document.getElementById("comocaperucita").value;
+    let objetocaperucita = document.getElementById("objetocaperucita").value;
+    let comolobo = document.getElementById("comolobo").value;
+    let objetolobo = document.getElementById("objetolobo").value;
+    let comoabuelita = document.getElementById("comoabuelita").value;
+    let objetoabuelita = document.getElementById("objetoabuelita").value;
+    let comocazador = document.getElementById("comocazador").value;
+    let objetocazador = document.getElementById("objetocazador").value;  
+    let comocaperucitaBln, objetocaperucitaBln, comoloboBln,objetoloboBln,comoabuelitaBln, objetoabuelitaBln, comocazadorBln, objetocazadorBln;   
+    comocaperucitaBln=isitTrue(comocaperucita);
+    objetocaperucitaBln=isitTrue(objetocaperucita);
+    comoloboBln=isitTrue(comolobo);
+    objetoloboBln=isitTrue(objetolobo);  
+    comoabuelitaBln=isitTrue(comoabuelita);
+    objetoabuelitaBln=isitTrue(objetoabuelita);
+    comocazadorBln=isitTrue(comocazador);
+    objetocazadorBln=isitTrue(objetocazador);
+
+    if(comocaperucitaBln && objetocaperucitaBln && comoloboBln && objetoloboBln && comoabuelitaBln && objetoabuelitaBln && comocazadorBln && objetocazadorBln){
+        router.push('/paint');
+    } else {     
+        swal ( "Oops" ,  "Se te olvida rellenar algun campo" ,  "error" )
+    }
+}
 </script>
 <template>
     <div id="container-table">
@@ -38,40 +67,26 @@ const characters = ref([
             <tbody>
                 <tr v-for="character in characters" :key="character.name">
                     <td class="imgcap" id="forimg">
-                        <!--<img :src="character.image" :alt="character.name">-->
-                        <!--Se cambio por object ya que a la hora de realizar la impresion de la anterior forma no cargaban las imagenes-->
                         <object :data="character.image"></object>
                     </td>
                     <td>
-                        <textarea class="textzone" :name="'como' + character.name" rows="3" :cols="'50'"
+                        <textarea class="textzone" :id="'como' + character.name" :name="'como' + character.name" rows="3" :cols="'50'"
                             maxlength="135"></textarea>
                     </td>
                     <td>
-                        <textarea class="textzone" :name="'objeto' + character.name" rows="3" cols="50"
+                        <textarea class="textzone" :id="'objeto' + character.name" :name="'objeto' + character.name" rows="3" cols="50"
                             maxlength="135"></textarea>
                     </td>
                 </tr>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <RouterLink to="/paint">
-                        <td><button  id="printButton" value="Imprimir" >Imprimir</button></td>
-                    </RouterLink>
-                    
-                     <!-- onclick="javascript:window.print()" -->
-                </tr>
-            </tfoot>
         </table>
-       
+        <button id="btnCap" class="buttonDiv" value="guardar"  @click="validate()">Guardar</button>
     </div>
-    
-      
-    
 </template>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap");
+
 table {
     font-family: 'Itim', cursive;
     border: 0px;
@@ -94,7 +109,7 @@ td {
 }
 #container-table {
     display: flex;
-   justify-content: center;
+    justify-content: center;
 }
 object {
     height: 150px;
@@ -114,67 +129,34 @@ object {
     text-align: center;
     font-size: 1.6em;
 }
-#printButton{
-    text-align: center;
+#btnCap{
+    font-family: "OpenSans", cursive;
+    /* margin-left: 40%; */
+    background-color: crimson;
+    color: #fff;
     border: none;
-    background-color: #8c52fe;
-    width: 125px;
-    height: 125px;
-    font-size: 1.6em;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    color:white;
-    font-weight: bold;
+    cursor: pointer;
 
 }
-#printButton:hover{
-    border:2px solid #8c52fe;
-    background-color: white;
-    color: #8c52fe;
+#btnCap:hover{
+    background-color: rgb(143, 15, 38);
+    color: #fff;
 }
-#buttonDiv{
-    border: 2px solid black;
-    display: flex;
-    justify-content: center;
-    
+.buttonDiv{
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 999;
 }
-@media print{   
-    /*Quitar el header y footer por defecto en la impresion desde el navegador, @page y body*/  
-        @page{
-            margin: 0;
-        }
-    
-        body{
-            margin:1.6cm;
-        }
-    /*Se especifican todos los tamaños anteriores, modificando el tamaño a cm de cara a una impresion en DINA4*/  
-        h1{
-            font-size: 10pt;
-        }
-        table{
-            width: 18cm;
-            height: 22cm;
-            margin: auto;
-        }
-        .thcabecera {
-            font-size: 12pt;
-            text-align: center;
-            height: 2cm;
-            width: 7cm;
+.modal {
+    position: fixed;
+    z-index: 99;
+    top: 20%;
+    left: 50%;
+    width: 300px;
+    margin-left: -150px;
 }
-        .textzone {
-            border: 0px;
-            height: 5cm;
-            width: 7cm;
-            outline: none;
-            text-align: center;
-            font-size: 14pt;
-}
-        object{
-            height: 5cm;
-            width: 4cm;
-        }
-        #printButton{
-            display:none;
-        }
-    }
 </style>
