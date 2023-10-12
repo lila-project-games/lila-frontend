@@ -17,11 +17,7 @@ export default {
 </template>
 
 <style scoped>
-/* .container {
-  /* background-color: rgb(43, 226, 83); */
-/* background-size: cover; */
-/* padding-bottom: 50px; */
-/* } */
+
 .next-button {
   background-color: rgba(139, 82, 254, 1);
   width: 50px;
