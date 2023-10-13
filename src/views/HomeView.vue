@@ -1,59 +1,37 @@
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import FooterLila from "../components/FooterLila.vue";
+  import { ref } from "vue";
+  import { useRouter } from "vue-router";
+  import FooterLila from "../components/FooterLila.vue";
 
-// export default {
+const insertName=()=>{
+    localStorage.removeItem('Name');
+    console.log(document.getElementById('textInput').value)
+    localStorage.setItem('Name',document.getElementById('textInput').value);
+}
 
-//     const name = ref("");
-//     const school = ref("");
-//     const router = useRouter();
-
-//     const guardarDatos = async () => {
-//       const datos = {
-//         name: name.value,
-//         school: school.value,
-//       };
-
-//       try {
-//         console.log("Datos guardados:", datos);
-//       } catch (error) {
-//         console.error(error);
-//       }
-//       router.push({ name: "home" });
-//     };
-
-//     return {
-//       name,
-//       school,
-//       guardarDatos,
-//     };
-// },
 </script>
 
 <template>
-  <div class="header">
-    <img src="../assets/header_home.svg" alt="Header" style="width: 100%" />
-  </div>
-  <div class="home">
-    <h1>Ingresa tu nombre completo y el nombre de tu colegio para comenzar.</h1>
-    <div class="container-fluid">
-      <div class="container conten-form">
-        <form>
-          <fieldset disabled>
-            <div class="mb-3">
-              <label for="disabledTextInput" class="form-label">Nombre</label>
-              <input type="text" id="disabledTextInput" class="form-control" />
-            </div>
-            <div class="mb-3">
-              <label for="disabledSelect" class="form-label">Colegio</label>
-              <select id="disabledSelect" class="form-select"></select>
-            </div>
-            <button type="submit" class="btn btn-primary text-center">
-              Empezar
-            </button>
-          </fieldset>
-        </form>
+  <div id="container">
+      <div class="header">
+        <img src="../assets/headhome.svg" alt="Header" />
+      </div>
+      <div id="containerHome">
+      <div class="home">
+        <h1>Ingresa tu nombre completo y el nombre de tu colegio para comenzar.</h1>
+        <div class="container-fluid">
+          <div class="container conten-form">
+            <form>
+                  <label for="textInput" class="form-label">Nombre</label>
+                  <input type="text" id="textInput" class="form-control" />
+                  <label for="selectOptions" class="form-label">Colegio</label>
+                  <select id="selectOptions" class="form-select"></select>
+                  <RouterLink to="/caperucita">
+                  <button type="submit" @click="insertName()" class="btn">Empezar</button>
+                </RouterLink>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -70,68 +48,80 @@ import FooterLila from "../components/FooterLila.vue";
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
 }
-
-.home {
-  background-image: url("../assets/fondo_page.svg");
+#container{
+  background-image: url("../assets/background_page.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
-  min-height: 100vh;
+  min-height: 100vh; 
+}
+
+#containerHome{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 25px;
+  padding: 20px 0;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  color: #fff;
-  padding: 20px;
+
 }
 .header img {
   width: 100%;
   max-width: 100%;
   height: auto;
-  margin-bottom: 20px;
 }
 .home h1 {
   color: #8b52fe;
   font-size: 24px;
   margin-top: 20px;
-  font-size: larger;
   font-family: "Luckiest Guy", cursive;
 }
 .container.conten-form {
   margin-top: 20px;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 form {
   text-align: left;
   color: #8b52fe;
+
 }
 .form-label {
   font-weight: bold;
-  height: 50%;
+  /* height: 50%; */
 }
 .form-control,
 .form-select {
   width: 100%;
   padding: 6px;
-  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.btn-primary {
-  background-color: hotpink;
-  color: #fff;
-  border: none;
-  padding: 5px 20px;
-  border-radius: 5px;
-  justify-content: center;
-  cursor: pointer;
+
+.btn {
+    text-align: center;
+    font-family: "OpenSans", cursive;
+    margin-top:3%;
+    margin-left: 40%;
+    background-color: crimson;
+    color: #fff;
+    border: none;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
 }
-.btn-primary:hover {
-  background-color: crimson;
+.btn:hover {
+    background-color: rgb(143, 15, 38);
+    color: #fff;
 }
 </style>
