@@ -1,39 +1,26 @@
-
 <script setup>
 import { onMounted, ref } from 'vue'
-import SchoolService from '../../services/SchoolServices'
+import StudentService from "../../services/StudentService";
 
-const schools = ref([]);
+
+const students = ref([]);
 const isLoading = ref(true);
 const isError = ref(false);
 const errorMessage = ref("");
 const showSuccessMessage = ref(false);
 
-// Función para obtener escuelas desde el backend
-const getSchools = async () => {
+// Get article ID from path
+const schoolId = window.location.pathname.split("/").pop();
+
+const getStudents = async (id) => {
     try {
-        const response = await SchoolService.list();
+        const response = await StudentService.getBySchoolId(id);
         return response.data.data;
     } catch (error) {
         console.error(error);
-        throw new Error("Error al obtener los colegios");
+        throw new Error("Error al obtener los estudiantes");
     }
 };
-
-const deleteSchole = async (id) => {
-    try {
-        const response = await SchoolService.delete(id)
-        if (response.data.success) {
-            window.location.reload();
-        } else {
-            errorMessage.value = "No fue posible eliminar el registro!";
-            isError.value = true;
-        }
-    } catch (error) {
-        console.error(error);
-        throw new Error("Error al intentar eliminar colegio");
-    }
-}
 
 // Función para manejar errores
 const handleErrors = (error) => {
@@ -42,9 +29,9 @@ const handleErrors = (error) => {
 };
 
 // Función para cargar las escuelas
-const loadSchools = async () => {
+const loadStudents = async () => {
     try {
-        schools.value = await getSchools();
+        students.value = await getStudents(schoolId);
         showSuccessMessage.value = true;
     } catch (error) {
         handleErrors(error);
@@ -53,24 +40,24 @@ const loadSchools = async () => {
     }
 };
 
+const deleteStudent = async (id) => {
+    try {
+        const response = await StudentService.delete(id)
+        if (response.data.success) {
+            window.location.reload();
+        } else {
+            isError.value = true;
+        }
+    } catch (error) {
+        console.error(error);
+        throw new Error("Error al intentar eliminar estudiante");
+    }
+}
+
 // Llama a loadSchools cuando el componente se monta
-onMounted(loadSchools);
+onMounted(loadStudents);
 
-// Función para redirigir a la página de creación de una nueva escuela
-const newSchool = () => {
-    window.location.href = "/admin/schools/new";
-};
-
-const editSchoolLink = (schoolId) => {
-    return `/admin/schools/edit/${schoolId}`; // Reemplaza esto con la lógica real para obtener el enlace de edición.
-};
-
-const getStudentsBySchoolLink = (schoolId) => {
-    return `/admin/students/by/school/${schoolId}`; // Reemplaza esto con la lógica real para obtener el enlace de edición.
-};
 </script>
-
-
 <template>
     <!-- Menú lateral -->
     <div class="sidebar">
@@ -94,20 +81,13 @@ const getStudentsBySchoolLink = (schoolId) => {
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2><b>Colegios</b></h2>
-                            </div>
-                            <div class="col-sm-6">
-                                <a href="/admin/schools/new" class="btn btn-success" data-toggle="modal"><i
-                                        class="material-icons">&#xE147;</i> <span>Neuevo</span></a>
+                                <h2><b>Estudiantes por colegio: </b></h2>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <div v-if="isError" class="error-message">
-                            Ha ocurrido un error al cargar los Colegios, error: {{ errorMessage }}...
-                        </div>
-                        <div v-else-if="isLoading" class="loading-message">
-                            Cargando Colegios...
+                        <div v-if="isLoading" class="loading-message">
+                            Cargando Estudiantes...
                         </div>
                         <div v-else>
                             <table class="table table-striped table-hover">
@@ -117,21 +97,24 @@ const getStudentsBySchoolLink = (schoolId) => {
                                             ID
                                         </th>
                                         <th>Nombre</th>
+                                        <th>Colegio</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(school, index) in schools" :key="index">
+                                    <tr v-for="(student, index) in students" :key="index">
                                         <td>
-                                            {{ school.id }}
+                                            {{ student.id }}
                                         </td>
                                         <td>
-                                            <a :href="getStudentsBySchoolLink(school.id)">{{ school.schoolName }} </a>
+                                            {{ student.studentName }}
                                         </td>
                                         <td>
-                                            <a :href="editSchoolLink(school.id)" class=" edit"><i class="material-icons"
-                                                    title="Edit">&#xE254;</i></a>
-                                            <a @click="deleteSchole(school.id)" class="delete"><i class="material-icons"
+                                            {{ student.school.schoolName }}
+                                        </td>
+
+                                        <td>
+                                            <a @click="deleteStudent(student.id)" class="delete"><i class="material-icons"
                                                     title="Delete">&#xE872;</i></a>
                                         </td>
                                     </tr>
@@ -471,13 +454,3 @@ table.table .avatar {
     font-weight: normal;
 }
 </style>
-
-
-
-
-
-
-
-
-
-

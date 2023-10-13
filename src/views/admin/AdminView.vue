@@ -12,6 +12,7 @@
         <h2>Panel de Control</h2>
         <a href="/admin">Inicio</a>
         <a href="/admin/schools">Colegios</a>
+        <a href="/admin/students">Estudiantes</a>
         <a href="/">salir</a>
     </div>
 

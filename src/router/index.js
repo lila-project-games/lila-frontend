@@ -48,7 +48,17 @@ const router = createRouter({
       path: '/admin/schools/new',
       name: 'nuevo-colegio',
       component: () => import('../views/admin/SchoolsNewView.vue')
-    }
+    },
+    {
+      path: '/admin/students',
+      name: 'students-list',
+      component: () => import('../views/admin/StudentsView.vue'),
+    },
+    {
+      path: '/admin/students/by/school/:id',
+      name: 'students-list-by-school',
+      component: () => import('../views/admin/StudentsBySchoolView.vue'),
+    },
   ]
 })
 
