@@ -37,22 +37,22 @@ const redirectToDashBoard = () => {
 <template>
     <!-- Menú lateral -->
     <div class="sidebar">
-        <h2>Panel de Control</h2>
+        
         <a href="/admin">Inicio</a>
-        <a href="/admin/schools">Colegios</a>
-        <a href="/admin/students">Estudiantes</a>
-        <a href="/">salir</a>
+        <a href="/admin/schools">Centro Educativo</a>
+        <a href="/admin/students">Alumnado</a>
+        <a href="/">Salir</a>
     </div>
     <!-- Contenido principal -->
     <div class="content">
         <!-- Barra de navegación -->
-        <nav class="navbar">
+       <!-- <nav class="navbar">
             <span class="navbar-brand">Mi Panel de Control Elegante</span>
-        </nav>
+        </nav>-->
         <div class="container">
             <form @submit="submitSchool">
                 <div class="modal-header">
-                    <h4 class="modal-title">Editar Colegio</h4>
+                    <h4 class="modal-title">Editar Centro Educativo</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -86,7 +86,7 @@ const redirectToDashBoard = () => {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #6c43e0;
+    background-color: rgb(139,83,255);
     /* Púrpura neón */
     padding-top: 20px;
     transition: 0.3s;
@@ -150,7 +150,7 @@ body {
 
 .table-title {
     padding-bottom: 15px;
-    background: #435d7d;
+    background: rgb(139,83,255);
     color: #fff;
     padding: 16px 30px;
     min-width: 100%;

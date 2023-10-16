@@ -9,23 +9,23 @@
 <template>
     <!-- Menú lateral -->
     <div class="sidebar">
-        <h2>Panel de Control</h2>
+        
         <a href="/admin">Inicio</a>
-        <a href="/admin/schools">Colegios</a>
-        <a href="/admin/students">Estudiantes</a>
-        <a href="/">salir</a>
+        <a href="/admin/schools">Centro Educativo</a>
+        <a href="/admin/students">Alumnado</a>
+        <a href="/">Salir</a>
     </div>
 
     <!-- Contenido principal -->
     <div class="content">
         <!-- Barra de navegación -->
-        <nav class="navbar">
-            <span class="navbar-brand">Mi Panel de Control Elegante</span>
-        </nav>
+        <!-- <nav class="navbar">
+           <span class="navbar-brand">Mi Panel de Control Elegante</span> 
+        </nav>-->
 
         <!-- Contenido del panel de control -->
-        <h1>Bienvenido al Panel de Control</h1>
-        <p>Este es un ejemplo de un panel de control elegante con menú lateral y barra de navegación.</p>
+        <h1>Panel de Control</h1>
+        <p>Panel de administracion para la gestión de centros educativos y alumnado</p>
     </div>
 </template>
 
@@ -37,7 +37,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #6c43e0;
+    background-color: rgb(139,83,255);
     /* Púrpura neón */
     padding-top: 20px;
     transition: 0.3s;
