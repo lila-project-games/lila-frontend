@@ -163,6 +163,7 @@ const verifica=()=>{
   const imageData = ctx.value.getImageData(0, 0, canvas.value.width, canvas.value.height).data;
   const tieneDibujo = imageData.some(channel => channel !== 0); 
   if (tieneDibujo) {
+    localStorage.setItem('drawridinghood', `${localStorage.getItem("Name")}.png`);
     saveBttn();
     router.push('/text');
   } else {

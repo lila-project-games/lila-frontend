@@ -3,6 +3,7 @@ import swal from 'sweetalert';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue'
 
+
 const characters = ref([
     {
         name: 'caperucita',
@@ -29,7 +30,7 @@ const isitTrue = (campo) => {
 }
 
 const validate=()=>{
-    let comocaperucita = document.getElementById("comocaperucita").value;
+     let comocaperucita = document.getElementById("comocaperucita").value;
     let objetocaperucita = document.getElementById("objetocaperucita").value;
     let comolobo = document.getElementById("comolobo").value;
     let objetolobo = document.getElementById("objetolobo").value;
@@ -48,12 +49,23 @@ const validate=()=>{
     objetocazadorBln=isitTrue(objetocazador);
 
     if(comocaperucitaBln && objetocaperucitaBln && comoloboBln && objetoloboBln && comoabuelitaBln && objetoabuelitaBln && comocazadorBln && objetocazadorBln){
+        localStorage.setItem('riding_hood_how', comocaperucita);
+        localStorage.setItem('riding_hood_obj', objetocaperucita);
+        localStorage.setItem('wolf_how', comolobo);
+        localStorage.setItem('wolf_obj', objetolobo);
+        localStorage.setItem('granny_how', comoabuelita);
+        localStorage.setItem('granny_obj', objetoabuelita);
+        localStorage.setItem('hunter_how', comocazador);
+        localStorage.setItem('hunter_obj', objetocazador);
+
         router.push('/paint');
     } else {     
         swal ( "Oops" ,  "Se te olvida rellenar algun campo" ,  "error" )
     }
 }
 </script>
+
+
 <template>
     <div id="container-table">
         <table>
