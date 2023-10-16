@@ -16,7 +16,7 @@ const getSchools = async () => {
         return response.data.data;
     } catch (error) {
         console.error(error);
-        throw new Error("Error al obtener los colegios");
+        throw new Error("Error al obtener los centros educativos");
     }
 };
 
@@ -31,7 +31,7 @@ const deleteSchole = async (id) => {
         }
     } catch (error) {
         console.error(error);
-        throw new Error("Error al intentar eliminar colegio");
+        throw new Error("Error al intentar eliminar centro educativo");
     }
 }
 
@@ -74,40 +74,39 @@ const getStudentsBySchoolLink = (schoolId) => {
 <template>
     <!-- Menú lateral -->
     <div class="sidebar">
-        <h2>Panel de Control</h2>
         <a href="/admin">Inicio</a>
-        <a href="/admin/schools">Colegios</a>
-        <a href="/admin/students">Estudiantes</a>
-        <a href="/">salir</a>
+        <a href="/admin/schools">Centro Educativo</a>
+        <a href="/admin/students">Alumnado</a>
+        <a href="/">Salir</a>
     </div>
 
 
     <!-- Contenido principal -->
     <div class="content">
         <!-- Barra de navegación -->
-        <nav class="navbar">
+       <!-- <nav class="navbar">
             <span class="navbar-brand">Mi Panel de Control Elegante</span>
-        </nav>
+        </nav>-->
         <div class="container-xl">
             <div class="table-responsive">
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2><b>Colegios</b></h2>
+                                <h2><b>Centro Educativo</b></h2>
                             </div>
                             <div class="col-sm-6">
                                 <a href="/admin/schools/new" class="btn btn-success" data-toggle="modal"><i
-                                        class="material-icons">&#xE147;</i> <span>Neuevo</span></a>
+                                        class="material-icons">&#xE147;</i> <span>Añadir</span></a>
                             </div>
                         </div>
                     </div>
                     <div>
                         <div v-if="isError" class="error-message">
-                            Ha ocurrido un error al cargar los Colegios, error: {{ errorMessage }}...
+                            Ha ocurrido un error al cargar el centro educativo, error: {{ errorMessage }}...
                         </div>
                         <div v-else-if="isLoading" class="loading-message">
-                            Cargando Colegios...
+                            Cargando centro educativo...
                         </div>
                         <div v-else>
                             <table class="table table-striped table-hover">
@@ -117,7 +116,7 @@ const getStudentsBySchoolLink = (schoolId) => {
                                             ID
                                         </th>
                                         <th>Nombre</th>
-                                        <th>Acciones</th>
+                                        <th>Editar/Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -153,7 +152,7 @@ const getStudentsBySchoolLink = (schoolId) => {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #6c43e0;
+    background-color: rgb(139,83,255);
     /* Púrpura neón */
     padding-top: 20px;
     transition: 0.3s;
@@ -217,7 +216,7 @@ body {
 
 .table-title {
     padding-bottom: 15px;
-    background: #435d7d;
+    background: rgb(139,83,255);
     color: #fff;
     padding: 16px 30px;
     min-width: 100%;

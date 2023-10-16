@@ -61,33 +61,32 @@ onMounted(loadStudents);
 <template>
     <!-- Menú lateral -->
     <div class="sidebar">
-        <h2>Panel de Control</h2>
         <a href="/admin">Inicio</a>
-        <a href="/admin/schools">Colegios</a>
-        <a href="/admin/students">Estudiantes</a>
-        <a href="/">salir</a>
+        <a href="/admin/schools">Centro Educativo</a>
+        <a href="/admin/students">Alumnado</a>
+        <a href="/">Salir</a>
     </div>
 
 
     <!-- Contenido principal -->
     <div class="content">
         <!-- Barra de navegación -->
-        <nav class="navbar">
+       <!-- <nav class="navbar">
             <span class="navbar-brand">Mi Panel de Control Elegante</span>
-        </nav>
+        </nav>-->
         <div class="container-xl">
             <div class="table-responsive">
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2><b>Estudiantes por colegio: </b></h2>
+                                <h2><b>Alumno por centro educativo: </b></h2>
                             </div>
                         </div>
                     </div>
                     <div>
                         <div v-if="isLoading" class="loading-message">
-                            Cargando Estudiantes...
+                            Cargando Alumnado...
                         </div>
                         <div v-else>
                             <table class="table table-striped table-hover">
@@ -97,8 +96,8 @@ onMounted(loadStudents);
                                             ID
                                         </th>
                                         <th>Nombre</th>
-                                        <th>Colegio</th>
-                                        <th>Acciones</th>
+                                        <th>Centro Educativo</th>
+                                        <th>Editar/Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -136,7 +135,7 @@ onMounted(loadStudents);
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #6c43e0;
+    background-color: rgb(139,83,255);
     /* Púrpura neón */
     padding-top: 20px;
     transition: 0.3s;
@@ -200,7 +199,7 @@ body {
 
 .table-title {
     padding-bottom: 15px;
-    background: #435d7d;
+    background: rgb(139,83,255);
     color: #fff;
     padding: 16px 30px;
     min-width: 100%;
