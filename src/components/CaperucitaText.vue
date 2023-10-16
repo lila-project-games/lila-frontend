@@ -1,5 +1,8 @@
 <script setup>
 import { useRouter } from 'vue-router';
+import ApiConnection from '../services/ApiConnection';
+import { ref } from 'vue'
+
 const router = useRouter();
 
 const isitTrue = (campo) => {
@@ -11,20 +14,70 @@ const validate=()=>{
     let historyBln;   
     historyBln=isitTrue(history);
     if(historyBln){
+      localStorage.setItem('story', history);
+        addUser(history);
         router.push('/theEnd');
     } else {     
         swal ( "Oops" ,  "No se te olvida escribir algo" ,  "error" );
     }
 }
+
+//conexion
+
+const story = ref("");
+
+ async function addUser(history) {
+    try {
+      let name =  localStorage.getItem('Name');
+      let school =  localStorage.getItem('School')
+      let riding_hood_how =  localStorage.getItem('riding_hood_how')
+      let riding_hood_obj =  localStorage.getItem('riding_hood_obj')
+      let wolf_how =  localStorage.getItem('wolf_how')
+      let wolf_obj =  localStorage.getItem('wolf_obj')
+      let granny_how =  localStorage.getItem('granny_how')
+      let granny_obj =  localStorage.getItem('granny_obj')
+      let hunter_how =  localStorage.getItem('hunter_how')
+      let hunter_obj =  localStorage.getItem('hunter_obj')
+      let drawridinghood =  localStorage.getItem('drawridinghood')
+      let story =  localStorage.getItem('story')
+         const user = {
+             studentId: null,
+             story: story,
+             ridingHoodHow: riding_hood_how,
+             ridingHoodObj: riding_hood_obj,
+             wolfHow: wolf_how,
+             wolfObj: wolf_obj,
+             grannyHow: granny_how,
+             grannyObj: granny_obj,
+             hunterHow: hunter_how,
+             hunterObj: hunter_obj,
+             drawRidingHood: drawridinghood             
+          }; 
+
+           
+            let users =JSON.stringify(user)
+            console.log(users)
+            const response = await ApiConnection.addUser(users, {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+       
+    }catch (error) {
+      console.error("Error al agregar story:", error);
+  }
+}
+
+
 </script>
 <template>
     <div class="outer-box">
       <div class="title">
           ÉRASE UNA VEZ...
       </div>
-      <textarea id='history' class="story-text" rows="5" placeholder="Escribe tu historia aquí..."></textarea>
+      <textarea id='history' class="story-text" v-model="story" rows="5" placeholder="Escribe tu historia aquí..."></textarea>
     </div>
-      <button id="btnCap" class="buttonDiv" @click="validate()">Guardar</button>
+      <button id="btnCap" type="submit" class="buttonDiv" @click="validate()">Guardar</button>
 </template>
 
 <style scoped>

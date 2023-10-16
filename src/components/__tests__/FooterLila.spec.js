@@ -18,7 +18,7 @@ describe('Copyright and logo', () => {
     });
     it('Verify the presence of the Lila logo', () => {
         const wrapper = mount(FooterLila);
-        const logoElement = wrapper.find('img.lila_transp');
+        const logoElement = wrapper.find('img.lila_transp'); 
         expect(logoElement.exists()).toBe(true);
       });      
   }); 

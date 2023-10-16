@@ -17,6 +17,6 @@ describe('Render', () => {
         const vm = wrapper.vm;
         expect(Array.isArray(vm.characters)).toBe(true);
       });
-  });
+  }); 
 
   
