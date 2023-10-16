@@ -1,7 +1,6 @@
- import { describe, it, expect } from 'vitest'
-
- import { mount } from '@vue/test-utils'
- import HomeView from '../../views/HomeView.vue'
+//  import { describe, it, expect } from 'vitest'
+//  import { mount } from '@vue/test-utils'
+//  import HomeView from '../../views/HomeView.vue'
 
  describe('HomeView', () => {
    it('renders properly', () => {
@@ -19,7 +18,7 @@
     const wrapper = mount(HomeView)
     const startButton = wrapper.find("button");
     expect(startButton.exists()).toBe(true);
-    expect(startButton.text()).toBe("Empezar");
+    expect(startButton.text()).toBe("Empezar"); 
   })
  })
 

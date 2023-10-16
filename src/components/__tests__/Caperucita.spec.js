@@ -12,4 +12,4 @@ describe('Caperucita', () => {
         const headerImage = wrapper.find("img");
         expect(headerImage.exists()).toBe(true);
       })
-}); 
+});  
