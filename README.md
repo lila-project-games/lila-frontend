@@ -18,7 +18,7 @@ Make sure you have the following installed in your development environment:
 
 - [@Kevin Panjón](https://www.github.com/KevinPanjon)
 
-- [@Alex Lopez](https://www.github.com/alexf93)
+- [@Alex Lopez](https://www.github.com/alexlf93)
 
 - [@Carlos Galo](https://www.github.com/dosdedoce)
 
